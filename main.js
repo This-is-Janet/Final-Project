@@ -10,6 +10,9 @@ const clearAudio = new Audio("audio/clear.mp3");
 const rainAudio = new Audio("audio/light-rain.mp3");
 let currentAudio;
 
+
+
+
 async function checkWeather(city) {
     const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
 

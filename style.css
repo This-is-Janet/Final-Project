@@ -50,17 +50,32 @@ body{
     width: 20px;
 }
 
+.error {
+    text-align: center;
+    padding-top: 10px;
+    display: none;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 為什麼兩個box沒有在中間? */
+    height: calc(100vh - 150px);
+}
+
 .box1 {
-    height: 600px;
-    background-color: #9b5050;
-    width: 70%;
-    margin: 0 20px 0 40px;
+    width: 30%;
+    height: 500px;
+    /* background-color: #9b5050; */
+    margin-right: 10px;
 }
 
 .box2 {
-    height: 600px;
-    background-color: aqua;
-    margin: 0 40px 0 0px;
+    width: 60%;
+    height: 500px;
+    /* background-color: aqua; */
+    margin-left: 10px;
 }
 
 
@@ -100,11 +115,6 @@ body{
     line-height: 40px;
 }
 
-.error {
-    text-align: center;
-    padding-top: 10px;
-    display: none;
-}
 
 .footer button {
     background-color: whitesmoke;
