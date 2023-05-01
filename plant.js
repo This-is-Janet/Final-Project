@@ -2,6 +2,7 @@ let width1 = window.innerWidth * 0.3;
 let height1 = 500;
 let p;
 let plants = [];
+let height = 500;
 
 
 

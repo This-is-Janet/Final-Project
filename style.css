@@ -58,26 +58,27 @@ body{
 
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* 為什麼兩個box沒有在中間? */
+    display: grid;
+    width: 90vw;
     height: calc(100vh - 150px);
+    grid-template-rows: 350px 150px;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
+    justify-items: center; /*not working!!*/
+    align-content: center;
 }
 
 .box1 {
-    width: 30%;
-    height: 500px;
-    /* background-color: #9b5050; */
-    margin-right: 10px;
+    grid-row: 1 / 3;
 }
 
 .box2 {
-    width: 60%;
-    height: 500px;
-    /* background-color: aqua; */
-    margin-left: 10px;
+    grid-row: 1 / 2;
 }
 
+.box3 {
+    grid-row: 2 / 3;
+}
 
 .footer {
     width: 100%;
