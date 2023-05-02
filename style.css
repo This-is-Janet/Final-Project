@@ -59,12 +59,12 @@ body{
 
 .container {
     display: grid;
-    width: 90vw;
+    width: 100vw;
     height: calc(100vh - 150px);
     grid-template-rows: 350px 150px;
     grid-template-columns: 1fr 2fr;
-    column-gap: 20px;
-    justify-items: center; /*not working!!*/
+    /* column-gap: 20px; */
+    justify-items: center;
     align-content: center;
 }
 

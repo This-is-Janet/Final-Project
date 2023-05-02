@@ -7,61 +7,56 @@ let heightBottom = 150;
 new p5(p => {
     let bug;
     const grayLevel = 240;
-    let s1, s2;
-    let gravity = 9.0;
-    let mass = 2.0;
-  
+    let x = [0, 0];
+    let y = [0, 0];
+    let segLength = 50;
+
     p.setup = function() {
-      p.createCanvas(width, heightUp).parent(box2);
+      p.createCanvas(width+40, heightUp).parent(box2);
       p.background(grayLevel);
       bug = p.loadImage("images/ladybug.png");
       fly = p.loadImage("images/butterfly.png");
-      s1 = new drawBug(0.0, p.width / 2, mass, gravity);
-      s2 = new drawBug(0.0, p.width / 2, mass, gravity);
     };
-  
-    function drawBug(xpos, ypos, m, g) {
-      this.x = xpos; // The x- and y-coordinates
-      this.y = ypos;
-      this.vx = 0; // The x- and y-axis velocities
-      this.vy = 0;
-      this.mass = m;
-      this.gravity = g;
-      this.radius = 30;
-      this.stiffness = 0.2;
-      this.damping = 0.7;
-  
-      this.update = function(targetX, targetY) {
-        let forceX = (targetX - this.x) * this.stiffness;
-        let ax = forceX / this.mass;
-        this.vx = this.damping * (this.vx + ax);
-        this.x += this.vx;
-        let forceY = (targetY - this.y) * this.stiffness;
-        forceY += this.gravity;
-        let ay = forceY / this.mass;
-        this.vy = this.damping * (this.vy + ay);
-        this.y += this.vy;
-      };
-  
-      this.display_1 = function(nx, ny) {
-        p.image(bug, this.x, this.y, bug.width/13, bug.height/13);
-        p.stroke(200);
-        p.line(this.x, this.y, nx, ny);
-      };
-
-      this.display_2 = function(nx, ny) {
-        p.image(fly, this.x, this.y, fly.width/13, fly.height/13);
-      };
-    }
-  
+    
     p.draw = function() {
-      //bug
       p.background(grayLevel);
-      s1.update(p.mouseX, p.mouseY);
-      s1.display_1(p.mouseX, p.mouseY);
-      s2.update(s1.x, s1.y);
-      s2.display_2(s1.x, s1.y)      
-    };
+      dragSegmentFly(0, p.mouseX, p.mouseY);
+      dragSegmentBug(1, x[0], y[0]);
+    }
+    
+    function dragSegmentBug(i, xin, yin) {
+      const dx = xin - x[i];
+      const dy = yin - y[i];
+      const angle = p.atan2(dy, dx);
+      x[i] = xin - p.cos(angle) * segLength;
+      y[i] = yin - p.sin(angle) * segLength;
+      segmentBug(x[i], y[i], angle);
+    }
+
+    function dragSegmentFly(i, xin, yin) {
+      const dx = xin - x[i];
+      const dy = yin - y[i];
+      const angle = p.atan2(dy, dx);
+      x[i] = xin - p.cos(angle) * segLength;
+      y[i] = yin - p.sin(angle) * segLength;
+      segmentFly(x[i], y[i], angle);
+    }
+    
+    function segmentBug(x, y, a) {
+      p.push();
+      p.translate(x, y);
+      p.rotate(a);
+      p.image(bug, 0, 0, bug.width/13, bug.height/13);
+      p.pop();
+    }
+
+    function segmentFly(x, y, a) {
+      p.push();
+      p.translate(x, y);
+      p.rotate(a);
+      p.image(fly, 0, 0, fly.width/13, fly.height/13);
+      p.pop();
+    }    
     
   });
 
@@ -73,7 +68,7 @@ new p5(p => {
     const grayLevel = 240;
 
     p.setup = function() {
-      p.createCanvas(width, heightBottom).parent(box3);
+      p.createCanvas(width+40, heightBottom).parent(box3);
       p.background(grayLevel);
       p.strokeWeight(1);
       // p.stroke(0, 30);
@@ -90,7 +85,7 @@ new p5(p => {
       p.stroke(20, b, 180-b, y*1.5-100); //specify color of the stroke. stroke(red,green,blue,alpha)
 
 
-      for (let x=border; y<=height;
+      for (let x=border; y<=heightBottom+30;
         x += xstep, y += ystep) {
       xstep = p.noise(30)*5 + p.random(3);
       ystep = p.noise(10)*40 + p.random(15);

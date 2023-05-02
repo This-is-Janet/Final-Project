@@ -7,7 +7,7 @@ let height = 500;
 
 
 new p5(p => {
-    const grayLevel = 240;
+    const grayLevel = 210;
 
 
     class Line {
@@ -22,7 +22,7 @@ new p5(p => {
                 //circle(this.start,pY,5)
                 // let sw = map(this.start,0,len,1,3)
                 let sw = this.start >= len-20 ? p.map(this.start,len-20,len,1.5,3.5) : 1.5
-                p.stroke(79, 111, 32); 
+                p.stroke(255, 255, 255); 
                 p.strokeWeight(sw)
                 p.point(this.start, pY)
                 this.start+=1.3
